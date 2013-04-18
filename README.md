@@ -2,7 +2,7 @@ Author: Tore Lervik - http://mindre.net
 
 Download: https://nuget.org/packages/MvcOptimizations or ```PM> Install-Package MvcOptimizations```
 
-# Methods
+# Documentation
 
 ## HtmlMinifierAttribute
 
