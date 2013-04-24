@@ -5,7 +5,7 @@ namespace MvcOptimizations
 {
     public class CompressFilterAttribute : ActionFilterAttribute
     {
-        public override void OnActionExecuting(ActionExecutingContext filterContext)
+        public override void OnResultExecuting(ResultExecutingContext filterContext)
         {
             var request = filterContext.HttpContext.Request;
             var acceptEncoding = request.Headers["Accept-Encoding"];
