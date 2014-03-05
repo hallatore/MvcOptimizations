@@ -18,10 +18,10 @@ namespace MvcOptimizations
             var resp = HttpContext.Current.Response;
             var charset = resp.Charset ?? "utf-8";
             var encoding = Encoding.GetEncoding(charset);
-            var html = encoding.GetString(buffer);
+            var html = encoding.GetString(buffer, offset, count);
             html = RegexRemoveWhitespace2.Replace(RegexRemoveWhitespace.Replace(html, "><"), "> <");
             buffer = encoding.GetBytes(html);
-            _response.Write(buffer, offset, buffer.Length);
+            _response.Write(buffer, 0, buffer.Length);
         }
 
         private static readonly Regex RegexRemoveWhitespace = new Regex(">[\r\n][ \r\n\t]*<", RegexOptions.Multiline | RegexOptions.Compiled);
