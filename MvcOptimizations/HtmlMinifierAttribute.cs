@@ -7,7 +7,9 @@ namespace MvcOptimizations
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             var response = filterContext.HttpContext.Response;
-            response.Filter = new HtmlMinifierFilter(response.Filter);
+
+            if (response.ContentType == "text/html")
+                response.Filter = new HtmlMinifierFilter(response.Filter);
         }
     }
 }

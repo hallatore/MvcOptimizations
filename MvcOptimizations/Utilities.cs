@@ -8,21 +8,25 @@ namespace MvcOptimizations
     {
         public static T Cache<T>(string key, TimeSpan duration, Func<T> action, CacheItemPriority priority = CacheItemPriority.Normal) where T : class
         {
-            var result = HttpRuntime.Cache[key] as T;
+            var value = HttpRuntime.Cache[key] as T;
 
-            if (result == null)
+            if (value == null)
             {
-                result = action();
-                HttpRuntime.Cache.Add(key,
-                    result,
-                    null,
-                    DateTime.Now + duration,
-                    System.Web.Caching.Cache.NoSlidingExpiration,
-                    priority,
-                    null);
+                value = action();
+
+                if (value != null)
+                {
+                    HttpRuntime.Cache.Insert(key,
+                                      value,
+                                      null,
+                                      DateTime.Now + duration,
+                                      System.Web.Caching.Cache.NoSlidingExpiration,
+                                      priority,
+                                      null);
+                }                
             }
 
-            return result;
+            return value;
         }
     }
 }
