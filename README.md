@@ -6,11 +6,15 @@ Download: https://nuget.org/packages/MvcOptimizations or ```PM> Install-Package 
 
 ## HtmlMinifierAttribute
 
-Minifies the html-output to remove whitespace. Usually removes 15-20% of the content on MVC pages and only has about 1ms overhead.
+Minifies the html-output to remove whitespace. Usually removes 15-20% of the content on MVC pages and only has about 1ms overhead. The filter will only trigger when the content type is text/html.
 
 ```csharp
 [HtmlMinifier]
 public ActionResult Index() { ... }
+
+// or
+
+filters.Add(new HtmlMinifierAttribute());
 ```
 
 
