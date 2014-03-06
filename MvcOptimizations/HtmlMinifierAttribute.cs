@@ -4,11 +4,11 @@ namespace MvcOptimizations
 {
     public class HtmlMinifierAttribute : ActionFilterAttribute
     {
-        public override void OnActionExecuting(ActionExecutingContext filterContext)
+        public override void OnResultExecuting(ResultExecutingContext filterContext)
         {
             var response = filterContext.HttpContext.Response;
 
-            if (response.ContentType == "text/html")
+            if (filterContext.Result is ViewResult)
                 response.Filter = new HtmlMinifierFilter(response.Filter);
         }
     }
